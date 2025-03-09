@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOM Simulator</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./images/multimeter-icon.png">
+</head>
+<body>
+    <div class="simulator_container">
+        <div class="fsd_table">
+            <h1>Full Scale Deflection</h1>
+            <div class="fsd_details">
+                <div class="label">10</div>
+                <div class="label">50</div>
+                <div class="label">250</div>
+
+                <div class="value">0</div>
+                <div class="value">0</div>
+                <div class="value">0</div>
+            </div>
+            <p>Anticipated Needle Deflection</p>
+        </div>
+        <div class="multimeter">
+            <img src="./images/multimeter.png">
+            <button id= "btns" class="up"> /\ </button>
+            <button id= "btns" class="down">\/</button>
+            <div class="multimeasurements">
+                <img src="./images/measurements.png">   
+            </div>
+            <div class="needle_handler">
+                <div class="needle"></div>
+            </div>
+            <div class="knob_container">
+                <div class="box">
+                    <div class="circle">
+                        <div class="knob_handle">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="anti_values">
+            <div class="input">
+                <h1>Anticipated value</h1>
+                <input type="text" class="textbox" placeholder="Enter your value">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+</html>
