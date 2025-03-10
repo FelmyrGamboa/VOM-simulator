@@ -159,141 +159,144 @@ const handleUp = document.querySelector('.up');
 const handleDown = document.querySelector('.down');
 let currentRotation = 104;
 
-const run = (box) => {
-    let active = false;
-    let lastX = 0; // To store the initial mouse position
-
-    box.addEventListener("mousedown", function(e) {
-        active = true;
-        lastX = e.clientX;
-    });
-
-    box.addEventListener("mouseup", function() {
-        active = false;
-        
-    });
-
-    // box.addEventListener("mouseleave", function() {
-    //     active = false;
-    // });
-
-    box.addEventListener('mousemove', function(e) {
-        if (active) {
-            // Calculate the change in mouse position (how far the mouse has moved)
-            let deltaX = e.clientX - lastX;
-            
-            // Use the difference to increase rotation. Increase the multiplier for higher sensitivity.
-            let rotationIncrement = deltaX * 16.364; // Adjust 0.5 to control sensitivity
-            
-            currentRotation += rotationIncrement;
-            currentRotation = (currentRotation + 360) % 360;
-            box.style.transform = `rotate(${currentRotation}deg)`;
-            
-            // Update lastX for the next movement
+document.addEventListener("DOMContentLoaded", function() {
+    const run = (box) => {
+        let active = false;
+        let lastX = 0; // To store the initial mouse position
+    
+        box.addEventListener("mousedown", function(e) {
+            active = true;
             lastX = e.clientX;
-            FuncIdentifier(Math.floor(currentRotation));
-        }
-    });
-
-    box.addEventListener("touchstart", function(e) {
-        active = true;
-        lastX = e.touches[0].clientX;
-    });
-
-    box.addEventListener("touchend", function() {
-        active = false;
-    });
-
-    box.addEventListener("touchcancel", function() {
-        active = false;
-    });
-
-    box.addEventListener('touchmove', function(e) {
-        if (active) {
-            // Calculate the change in mouse position (how far the mouse has moved)
-            let deltaX = e.touches[0].clientX - lastX;
+        });
+    
+        box.addEventListener("mouseup", function() {
+            active = false;
             
-            // Use the difference to increase rotation. Increase the multiplier for higher sensitivity.
-            let rotationIncrement = deltaX * 16.364; // Adjust 0.5 to control sensitivity
-            
-            currentRotation += rotationIncrement;
+        });
+    
+        // box.addEventListener("mouseleave", function() {
+        //     active = false;
+        // });
+    
+        box.addEventListener('mousemove', function(e) {
+            if (active) {
+                // Calculate the change in mouse position (how far the mouse has moved)
+                let deltaX = e.clientX - lastX;
+                
+                // Use the difference to increase rotation. Increase the multiplier for higher sensitivity.
+                let rotationIncrement = deltaX * 16.364; // Adjust 0.5 to control sensitivity
+                
+                currentRotation += rotationIncrement;
+                currentRotation = (currentRotation + 360) % 360;
+                box.style.transform = `rotate(${currentRotation}deg)`;
+                
+                // Update lastX for the next movement
+                lastX = e.clientX;
+                FuncIdentifier(Math.floor(currentRotation));
+            }
+        });
+    
+        box.addEventListener("touchstart", function(e) {
+            active = true;
+            lastX = e.touches[0].clientX;
+        });
+    
+        box.addEventListener("touchend", function() {
+            active = false;
+        });
+    
+        box.addEventListener("touchcancel", function() {
+            active = false;
+        });
+    
+        box.addEventListener('touchmove', function(e) {
+            if (active) {
+                // Calculate the change in mouse position (how far the mouse has moved)
+                let deltaX = e.touches[0].clientX - lastX;
+                
+                // Use the difference to increase rotation. Increase the multiplier for higher sensitivity.
+                let rotationIncrement = deltaX * 16.364; // Adjust 0.5 to control sensitivity
+                
+                currentRotation += rotationIncrement;
+                currentRotation = (currentRotation + 360) % 360;
+                box.style.transform = `rotate(${currentRotation}deg)`;
+                
+                // Update lastX for the next movement
+                lastX = e.clientX;
+                FuncIdentifier(Math.floor(currentRotation));
+            }
+        });
+    
+        handleUp.addEventListener('click', function() {
+                currentRotation += 16.364;
+                currentRotation = (currentRotation + 360) % 360;
+                box.style.transform = `rotate(${currentRotation}deg)`;
+                FuncIdentifier(Math.floor(currentRotation));
+        });
+    
+        handleDown.addEventListener('click', function() {
+            currentRotation -= 16.364;
             currentRotation = (currentRotation + 360) % 360;
             box.style.transform = `rotate(${currentRotation}deg)`;
-            
-            // Update lastX for the next movement
-            lastX = e.clientX;
             FuncIdentifier(Math.floor(currentRotation));
+        });
+    
+    };
+    
+    run(box);
+    
+    
+    function FuncIdentifier(angle) {
+        // minAngle = 49deg
+        // DC/ R = 131deg maxAngle
+        // AC = 131.5deg
+    
+        let angles = {
+            5 : ["Vdc Null", 5],
+            22 : ["Vac", 750],
+            38 : ["Vac", 250],
+            54 : ["Vac", 50],
+            71 : ["Vac", 10],
+            87 : "Capacitance",
+            104 : "OFF",
+            120 : ["R", 1000],
+            136 : ["R", 100], 
+            153 : ["R", 10], 
+            169 : ["R", 1], 
+            185 : ["mA", 250], 
+            202 : ["mA", 25], 
+            218 : ["mA", 2.5], 
+            234 : ["mA", 0.05],
+            251 : ["Vdc", 0.25], 
+            267 : ["Vdc", 2.5], 
+            284 : ["Vdc", 10], 
+            300 : ["Vdc", 50], 
+            316 : ["Vdc", 250],
+            333 : ["Vdc", 1000], 
+            349 : ["Vdc Null", 25]
         }
-    });
+    
+        let selectedAngle = angles[angle];
+        if (selectedAngle?.[0] === "Vdc") {
+            
+            console.log("EYYYYY");
+        }
+        else if (selectedAngle?.[0] === "Vac") {
+            console.log("BIIIIII");
+        }
+        else if (selectedAngle?.[0] === "mA") {
+            console.log("SIIIIII");
+        }
+        else if (selectedAngle === 'R' || selectedAngle === 'Vdc Null') { 
+            pass   
+            // alert("Coming Soon.... :p");
+        }
+        // if (selectedAngle) {
+        //     console.log(selectedAngle);
+        // }
+    };
+});
 
-    handleUp.addEventListener('click', function() {
-            currentRotation += 16.364;
-            currentRotation = (currentRotation + 360) % 360;
-            box.style.transform = `rotate(${currentRotation}deg)`;
-            FuncIdentifier(Math.floor(currentRotation));
-    });
-
-    handleDown.addEventListener('click', function() {
-        currentRotation -= 16.364;
-        currentRotation = (currentRotation + 360) % 360;
-        box.style.transform = `rotate(${currentRotation}deg)`;
-        FuncIdentifier(Math.floor(currentRotation));
-    });
-
-};
-
-run(box);
-
-
-function FuncIdentifier(angle) {
-    // minAngle = 49deg
-    // DC/ R = 131deg maxAngle
-    // AC = 131.5deg
-
-    let angles = {
-        5 : ["Vdc Null", 5],
-        22 : ["Vac", 750],
-        38 : ["Vac", 250],
-        54 : ["Vac", 50],
-        71 : ["Vac", 10],
-        87 : "Capacitance",
-        104 : "OFF",
-        120 : ["R", 1000],
-        136 : ["R", 100], 
-        153 : ["R", 10], 
-        169 : ["R", 1], 
-        185 : ["mA", 250], 
-        202 : ["mA", 25], 
-        218 : ["mA", 2.5], 
-        234 : ["mA", 0.05],
-        251 : ["Vdc", 0.25], 
-        267 : ["Vdc", 2.5], 
-        284 : ["Vdc", 10], 
-        300 : ["Vdc", 50], 
-        316 : ["Vdc", 250],
-        333 : ["Vdc", 1000], 
-        349 : ["Vdc Null", 25]
-    }
-
-    let selectedAngle = angles[angle];
-    if (selectedAngle?.[0] === "Vdc") {
-        
-        console.log("EYYYYY");
-    }
-    else if (selectedAngle?.[0] === "Vac") {
-        console.log("BIIIIII");
-    }
-    else if (selectedAngle?.[0] === "mA") {
-        console.log("SIIIIII");
-    }
-    else if (selectedAngle === 'R' || selectedAngle === 'Vdc Null') { 
-        pass   
-        // alert("Coming Soon.... :p");
-    }
-    // if (selectedAngle) {
-    //     console.log(selectedAngle);
-    // }
-};
 
 // BEST ----------> 
 // const run = (box) => {
