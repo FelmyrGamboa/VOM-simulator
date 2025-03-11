@@ -157,6 +157,10 @@ const box = document.querySelector('.box');
 // const knobHandle = document.querySelector('.knob_handle');
 const handleUp = document.querySelector('.up');
 const handleDown = document.querySelector('.down');
+const dropdowns = document.querySelector('.dropdown');
+const contents = dropdowns.querySelectorAll('.contents h4');
+const select = dropdowns.querySelector('.selected');
+const caret = dropdowns.querySelector('.caret');
 let currentRotation = 104;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -295,6 +299,51 @@ document.addEventListener("DOMContentLoaded", function() {
         //     console.log(selectedAngle);
         // }
     };
+
+    dropdowns.addEventListener('mouseenter', () => {
+        select.classList.toggle('selection-clicked');
+        caret.classList.toggle('caret-rotate');
+
+        contents.forEach(item => {
+            item.addEventListener('click', () => {
+                console.log(item.innerText);
+                select.innerText = item.innerText;
+            });
+        });
+    });
+
+    dropdowns.addEventListener('mouseleave', () => {
+        select.classList.remove('select-clicked');
+        caret.classList.remove('caret-rotate');
+    });
+
+    // dropdowns.forEach(dropdown => {
+    //     const select = dropdown.querySelector('.selection');
+    //     const caret = dropdown.querySelector('.caret');
+    //     const label_choices = dropdown.querySelector('.label_choices');
+    //     const options = dropdown.querySelectorAll('.label_choices li');
+    //     const selected = dropdown.querySelector('.selected');
+
+    //     select.addEventListener('click', () => {
+    //         select.classList.toggle('selection-clicked');
+    //         caret.classList.toggle('caret-rotate');
+    //         label_choices.classList.toggle('label_choices-open');
+    //     });
+
+    //     options.forEach(option => {
+    //         option.addEventListener('click', () => {
+    //             const optionText = option.querySelector('h4');
+    //             selected.innerText = optionText.innerText;
+    //             select.classList.remove('selection-clicked');
+    //             caret.classList.remove('caret-rotate');
+    //             label_choices.classList.remove('label_choices-open');
+    //             options.forEach(option => {
+    //                 option.classList.remove('active');
+    //             });
+    //             option.classList.add('active');
+    //         });
+    //     });
+    // });
 });
 
 
