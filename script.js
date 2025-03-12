@@ -303,18 +303,23 @@ document.addEventListener("DOMContentLoaded", function() {
     dropdowns.addEventListener('mouseenter', () => {
         select.classList.toggle('selection-clicked');
         caret.classList.toggle('caret-rotate');
-
-        contents.forEach(item => {
-            item.addEventListener('click', () => {
-                console.log(item.innerText);
-                select.innerText = item.innerText;
-            });
-        });
+        document.querySelector('.dropdown .contents').style.display = 'block';
     });
 
     dropdowns.addEventListener('mouseleave', () => {
         select.classList.remove('select-clicked');
         caret.classList.remove('caret-rotate');
+        document.querySelector('.dropdown .contents').style.display = 'none';
+    });
+
+    contents.forEach(item => {
+        item.addEventListener('click', () => {
+            console.log(item.innerText);
+            select.innerText = item.innerText;
+            select.classList.remove('selection-clicked');
+            caret.classList.remove('caret-rotate');
+            document.querySelector('.dropdown .contents').style.display = 'none';
+        });
     });
 
     // dropdowns.forEach(dropdown => {
