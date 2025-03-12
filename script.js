@@ -161,6 +161,7 @@ const dropdowns = document.querySelector('.dropdown');
 const contents = dropdowns.querySelectorAll('.contents h4');
 const select = dropdowns.querySelector('.selected');
 const caret = dropdowns.querySelector('.caret');
+const btnCalculate = document.querySelector('.calculate');
 let currentRotation = 104;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -249,12 +250,43 @@ document.addEventListener("DOMContentLoaded", function() {
     
     run(box);
     
-    
+    dropdowns.addEventListener('mouseenter', () => {
+        select.classList.toggle('selection-clicked');
+        caret.classList.toggle('caret-rotate');
+        document.querySelector('.dropdown .contents').style.display = 'block';
+    });
+
+    dropdowns.addEventListener('mouseleave', () => {
+        select.classList.remove('select-clicked');
+        caret.classList.remove('caret-rotate');
+        document.querySelector('.dropdown .contents').style.display = 'none';
+    });
+
+    contents.forEach(item => {
+        item.addEventListener('click', () => {
+            // console.log(item.innerText);
+            if (item.innerText === "Ω (ohms)") {
+                alert('Coming soon......');
+            }
+            else if (item.innerText === "μF") {
+                alert('Coming soon......');
+            }
+            else {
+                select.innerText = item.innerText;
+                select.classList.remove('selection-clicked');
+                caret.classList.remove('caret-rotate');
+                document.querySelector('.dropdown .contents').style.display = 'none';
+            }
+        });
+    });
+
     function FuncIdentifier(angle) {
         // minAngle = 49deg
         // DC/ R = 131deg maxAngle
         // AC = 131.5deg
-    
+        
+        let valueLabel = select.innerText;
+        let value = parseFloat(document.querySelector('.textbox').value);
         let angles = {
             5 : ["Vdc Null", 5],
             22 : ["Vac", 750],
@@ -281,15 +313,26 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
         let selectedAngle = angles[angle];
-        if (selectedAngle?.[0] === "Vdc") {
-            
-            console.log("EYYYYY");
+        if (selectedAngle?.[0] === "Vdc" && valueLabel === "Vdc") {
+            // console.log(value);
+            // console.log("EYYYYY");
+            btnCalculate.addEventListener('click', () => {
+                needleDeflection(selectedAngle?.[1], value);
+            })
         }
-        else if (selectedAngle?.[0] === "Vac") {
-            console.log("BIIIIII");
+        else if (selectedAngle?.[0] === "Vac" && valueLabel === "Vac") {
+            // console.log(value);
+            // console.log("BIIIIII");
+            btnCalculate.addEventListener('click', () => {
+                needleDeflection(selectedAngle?.[1], value);
+            })
         }
-        else if (selectedAngle?.[0] === "mA") {
-            console.log("SIIIIII");
+        else if (selectedAngle?.[0] === "mA" && valueLabel === "mA") {
+            // console.log(value);
+            // console.log("SIIIIII");
+            btnCalculate.addEventListener('click', () => {
+                needleDeflection(selectedAngle?.[1], value);
+            })
         }
         else if (selectedAngle === 'R' || selectedAngle === 'Vdc Null') { 
             pass   
@@ -300,27 +343,16 @@ document.addEventListener("DOMContentLoaded", function() {
         // }
     };
 
-    dropdowns.addEventListener('mouseenter', () => {
-        select.classList.toggle('selection-clicked');
-        caret.classList.toggle('caret-rotate');
-        document.querySelector('.dropdown .contents').style.display = 'block';
-    });
+    needleDeflection = (range, antiValue) => {
+        const fsd = [10, 50, 250];
 
-    dropdowns.addEventListener('mouseleave', () => {
-        select.classList.remove('select-clicked');
-        caret.classList.remove('caret-rotate');
-        document.querySelector('.dropdown .contents').style.display = 'none';
-    });
+        let needleDef10 = (antiValue * fsd?.[0]) / range;
+        let needleDef50 =  (antiValue * fsd?.[1]) / range;
+        let needleDef250 =  (antiValue * fsd?.[2]) / range;
 
-    contents.forEach(item => {
-        item.addEventListener('click', () => {
-            console.log(item.innerText);
-            select.innerText = item.innerText;
-            select.classList.remove('selection-clicked');
-            caret.classList.remove('caret-rotate');
-            document.querySelector('.dropdown .contents').style.display = 'none';
-        });
-    });
+        console.log(`10. ${needleDef10}, 50. ${needleDef50}, 250. ${needleDef250}`);
+    };
+
 
     // dropdowns.forEach(dropdown => {
     //     const select = dropdown.querySelector('.selection');
