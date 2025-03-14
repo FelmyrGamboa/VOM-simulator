@@ -12,13 +12,13 @@
         <div class="fsd_table">
             <h1>Full Scale Deflection</h1>
             <div class="fsd_details">
-                <div class="label">10</div>
-                <div class="label">50</div>
-                <div class="label">250</div>
+                <div class="label l10">10</div>
+                <div class="label l50">50</div>
+                <div class="label l250">250</div>
 
-                <div class="value">0</div>
-                <div class="value">0</div>
-                <div class="value">0</div>
+                <div class="value v10">0</div>
+                <div class="value v50">0</div>
+                <div class="value v250">0</div>
             </div>
             <p>Anticipated Needle Deflection</p>
         </div>
@@ -26,9 +26,9 @@
             <img src="./images/multimeter.png">
             <button id= "btns" class="up"> /\ </button>
             <button id= "btns" class="down">\/</button>
-            <div class="multimeasurements">
+            <!-- <div class="multimeasurements">
                 <img src="./images/measurements.png">   
-            </div>
+            </div> -->
             <div class="needle_handler">
                 <div class="needle"></div>
             </div>
@@ -43,8 +43,8 @@
             </div>
         </div>
         <div class="anti_values">
+            <h1>Anticipated value</h1>
             <div class="input">
-                <h1>Anticipated value</h1>
                 <div class="values_details">
                     <input type="text" class="textbox" placeholder="Enter your value">
                     <div class="dropdown">
@@ -59,40 +59,10 @@
                             <h4>Ω (ohms)</h4>
                             <h4>μF</h4>
                         </div>
-                        <!-- <ul class="labels">
-                            <li><h4>Vdc</h4></li>
-                            <li><h4>Vac</h4></li>
-                            <li><h4>mA</h4></li>
-                            <li><h4>Ω (ohms)</h4></li>
-                            <li><h4>μF</h4></li>
-                        </ul> -->
                     </div>
-                    <!-- <span class="select">Label</span>
-                    <div class="caret"></div>
-                    <ul class="dropdown">
-                        <li><h4>Vdc</h4></li>
-                        <li><h4>Vac</h4></li>
-                        <li><h4>mA</h4></li>
-                        <li><h4>Ω (ohms)</h4></li>
-                        <li><h4>μF</h4></li>
-                    </ul> -->
-
-                    
-                    <!-- <div class="dropdown">
-                        <div class="selection">
-                            <span class="selected">Vdc</span>
-                            <div class="caret"></div>
-                        </div>
-                        <ul class="label_choices">
-                            <li class="active"><h4>Vdc</h4></li>
-                            <li><h4>Vac</h4></li>
-                            <li><h4>mA</h4></li>
-                            <li><h4>Ω (ohms)</h4></li>
-                            <li><h4>μF</h4></li>
-                        </ul>
-                    </div> -->
                 </div>
             </div>
+            <button class="calculate">Calculate</button>
         </div>
     </div>
 </body>
